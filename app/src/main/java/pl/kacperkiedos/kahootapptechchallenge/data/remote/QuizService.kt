@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.data
+package pl.kacperkiedos.kahootapptechchallenge.data.remote
 
 import pl.kacperkiedos.kahootapptechchallenge.data.model.QuizResponse
 import retrofit2.http.GET

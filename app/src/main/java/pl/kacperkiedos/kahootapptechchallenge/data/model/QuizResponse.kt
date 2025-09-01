@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class QuizResponse(
     @SerialName("title") val title: String,
     @SerialName("description") val description: String,
-    @SerialName("audience") val audience: String,
+    @SerialName("audience") val audienceType: String,
     @SerialName("cover") val coverImageUrl: String,
     @SerialName("creator_username") val creatorUsername: String,
     @SerialName("questions") val questions: List<QuestionResponse>,

@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.di
+package pl.kacperkiedos.kahootapptechchallenge.data.di
 
 import dagger.Module
 import dagger.Provides
@@ -9,7 +9,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import pl.kacperkiedos.kahootapptechchallenge.BuildConfig
-import pl.kacperkiedos.kahootapptechchallenge.data.QuizService
+import pl.kacperkiedos.kahootapptechchallenge.data.remote.QuizService
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import javax.inject.Singleton
