@@ -1,8 +1,7 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui
+package pl.kacperkiedos.kahootapptechchallenge.ui.answer
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -10,8 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -20,13 +17,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.AnswerState
+import pl.kacperkiedos.kahootapptechchallenge.ui.common.CustomShadow
+import pl.kacperkiedos.kahootapptechchallenge.ui.common.darken
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundCorrect
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongSelected
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongUnselected
@@ -47,12 +46,7 @@ internal fun AnswerItem(
     onAnswerClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(Color.Transparent)
-            .padding(6.dp)
-    ) {
+    Box(modifier = modifier.fillMaxWidth()) {
         val backgroundColor = when (answerState) {
             AnswerState.QuizOngoing -> backgroundColor
             AnswerState.Correct -> QuestionBackgroundCorrect
@@ -60,17 +54,25 @@ internal fun AnswerItem(
             AnswerState.IncorrectUnselected -> QuestionBackgroundWrongUnselected
         }
 
+        CustomShadow(
+            color = backgroundColor.darken(darkenBy = 0.9f),
+            shapeCornerSize = 4.dp,
+            modifier = Modifier.fillMaxSize()
+        )
+
         Card(
             shape = RoundedCornerShape(4.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
             colors = CardDefaults.cardColors().copy(containerColor = backgroundColor),
             onClick = { onAnswerClick(index) },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 6.dp)
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
                 if (answerState == AnswerState.QuizOngoing) {
                     Icon(
                         painter = painterResource(questionIconId),
-                        tint = Color.White,
+                        tint = Color.Unspecified,
                         contentDescription = "",
                         modifier = Modifier
                             .align(Alignment.TopStart)
@@ -115,5 +117,4 @@ internal fun AnswerItem(
             )
         }
     }
-
 }

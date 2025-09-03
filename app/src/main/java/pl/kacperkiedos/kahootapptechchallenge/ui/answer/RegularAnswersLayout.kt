@@ -1,11 +1,13 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui
+package pl.kacperkiedos.kahootapptechchallenge.ui.answer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundBlue
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundGreen
@@ -25,6 +27,7 @@ internal fun RegularAnswersLayout(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth()
+                .padding(bottom = 8.dp)
         ) {
             AnswerItem(
                 text = "Item 1",
@@ -33,7 +36,9 @@ internal fun RegularAnswersLayout(
                 index = 1,
                 answerSide = AnswerSide.Left,
                 onAnswerClick = onAnswerClick,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
             )
 
             AnswerItem(
@@ -59,7 +64,9 @@ internal fun RegularAnswersLayout(
                 index = 3,
                 answerSide = AnswerSide.Left,
                 onAnswerClick = onAnswerClick,
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(end = 8.dp)
             )
 
             AnswerItem(

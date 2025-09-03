@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui
+package pl.kacperkiedos.kahootapptechchallenge.ui.common
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.shape.RoundedCornerShape
