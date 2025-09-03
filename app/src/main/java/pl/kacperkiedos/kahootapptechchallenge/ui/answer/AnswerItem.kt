@@ -25,8 +25,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.AnswerState
+import pl.kacperkiedos.kahootapptechchallenge.ui.common.AutoSizeText
 import pl.kacperkiedos.kahootapptechchallenge.ui.common.CustomShadow
 import pl.kacperkiedos.kahootapptechchallenge.ui.common.darken
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuestionState
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundCorrect
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongSelected
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongUnselected
@@ -43,16 +45,21 @@ internal fun AnswerItem(
     @DrawableRes questionIconId: Int,
     index: Int,
     answerSide: AnswerSide,
-    answerState: AnswerState = AnswerState.QuizOngoing,
+    questionState: QuestionState,
     onAnswerClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(RoundedCornerShape(4.dp))
-            .clickable(onClick = { onAnswerClick(index) })
-    ) {
+    Box(modifier = modifier.fillMaxWidth()) {
+        val answerState = when {
+            questionState is QuestionState.Answered -> when {
+                questionState.correctAnswerIndex == index -> AnswerState.Correct
+                questionState.isAnswerCorrect.not() && questionState.selectedAnswerIndex == index -> AnswerState.IncorrectSelected
+                else -> AnswerState.IncorrectUnselected
+            }
+
+            else -> AnswerState.QuizOngoing
+        }
+
         val backgroundColor = when (answerState) {
             AnswerState.QuizOngoing -> backgroundColor
             AnswerState.Correct -> QuestionBackgroundCorrect
@@ -60,41 +67,50 @@ internal fun AnswerItem(
             AnswerState.IncorrectUnselected -> QuestionBackgroundWrongUnselected
         }
 
-        CustomShadow(
-            color = backgroundColor.darken(darkenBy = 0.9f),
-            shapeCornerSize = 4.dp,
-            modifier = Modifier.fillMaxSize()
-        )
-
-        Card(
-            shape = RoundedCornerShape(4.dp),
-            colors = CardDefaults.cardColors().copy(containerColor = backgroundColor),
+        Box(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 6.dp)
+                .clip(RoundedCornerShape(4.dp))
+                .clickable(
+                    enabled = questionState == QuestionState.Displaying,
+                    onClick = { onAnswerClick(index) }
+                )
         ) {
-            Box(modifier = Modifier.fillMaxSize()) {
-                if (answerState == AnswerState.QuizOngoing) {
-                    Icon(
-                        painter = painterResource(questionIconId),
-                        tint = Color.Unspecified,
-                        contentDescription = "",
+            CustomShadow(
+                color = backgroundColor.darken(darkenBy = 0.9f),
+                shapeCornerSize = 4.dp,
+                modifier = Modifier.fillMaxSize()
+            )
+
+            Card(
+                shape = RoundedCornerShape(4.dp),
+                colors = CardDefaults.cardColors().copy(containerColor = backgroundColor),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 6.dp)
+            ) {
+                Box(modifier = Modifier.fillMaxSize()) {
+                    if (answerState == AnswerState.QuizOngoing) {
+                        Icon(
+                            painter = painterResource(questionIconId),
+                            tint = Color.Unspecified,
+                            contentDescription = "",
+                            modifier = Modifier
+                                .align(Alignment.TopStart)
+                                .padding(start = 6.dp, top = 8.dp)
+                                .height(14.dp)
+                        )
+                    }
+
+                    AutoSizeText(
+                        text = text,
+                        color = Color.White,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier
-                            .align(Alignment.TopStart)
-                            .padding(start = 6.dp, top = 8.dp)
-                            .height(14.dp)
+                            .padding(start = 28.dp, end = 28.dp, top = 12.dp, bottom = 4.dp)
+                            .align(Alignment.Center)
                     )
                 }
-
-                Text(
-                    text = text,
-                    color = Color.White,
-                    textAlign = TextAlign.Center,
-                    style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier
-                        .padding(horizontal = 28.dp, vertical = 12.dp)
-                        .align(Alignment.Center)
-                )
             }
         }
 

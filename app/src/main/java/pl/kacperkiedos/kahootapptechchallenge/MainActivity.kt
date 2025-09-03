@@ -1,30 +1,26 @@
 package pl.kacperkiedos.kahootapptechchallenge
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import pl.kacperkiedos.kahootapptechchallenge.data.remote.QuizService
 import pl.kacperkiedos.kahootapptechchallenge.domain.repository.QuizRepository
-import pl.kacperkiedos.kahootapptechchallenge.ui.QuizScreen
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizScreen
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizViewModel
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.KahootAppTechChallengeTheme
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var quizRepository: QuizRepository
+    private val viewModel: QuizViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +29,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             KahootAppTechChallengeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    val state by viewModel.stateFlow.collectAsStateWithLifecycle()
+
                     QuizScreen(
+                        state = state,
+                        onEvent = viewModel::onEvent,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }

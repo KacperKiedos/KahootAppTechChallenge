@@ -20,7 +20,7 @@ fun QuizResponse.QuestionResponse.map(): Question? {
     }
 
     return Question(
-        question = question,
+        questionText = question,
         time = time,
         type = if (choices.size == 2) QuestionType.TwoAnswers else QuestionType.FourAnswers,
         pointsMultiplier = pointsMultiplier,

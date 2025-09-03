@@ -1,7 +1,7 @@
 package pl.kacperkiedos.kahootapptechchallenge.domain.model
 
 data class Question(
-    val question: String,
+    val questionText: String,
     val time: Int,
     val pointsMultiplier: Int,
     val type: QuestionType,

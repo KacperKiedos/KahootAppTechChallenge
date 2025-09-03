@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import pl.kacperkiedos.kahootapptechchallenge.R
-import pl.kacperkiedos.kahootapptechchallenge.ui.RoundedContainer
+import pl.kacperkiedos.kahootapptechchallenge.ui.common.RoundedContainer
 
 @Composable
 internal fun QuizOngoingHeader(

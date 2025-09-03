@@ -74,7 +74,7 @@ val Typography = Typography(
         letterSpacing = 0.sp,
         shadow = Shadow(
             color = Color.Black.copy(alpha = 0.35f),
-            offset = Offset(0f, 5f),
+            offset = Offset(0f, 4f),
             blurRadius = 0f
         )
     ),

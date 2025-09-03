@@ -13,19 +13,16 @@ import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundCorrect
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongSelected
 
-enum class QuestionResult {
-    Success,
-    Failure
-}
+
 
 @Composable
 internal fun QuestionResultHeader(
-    questionResult: QuestionResult,
+    isCorrectAnswerSelected: Boolean,
     modifier: Modifier = Modifier
 ) {
     Box(
         modifier.background(
-            color = if (questionResult == QuestionResult.Success) {
+            color = if (isCorrectAnswerSelected) {
                 QuestionBackgroundCorrect
             } else {
                 QuestionBackgroundWrongSelected
@@ -34,7 +31,7 @@ internal fun QuestionResultHeader(
     ) {
         Text(
             text = stringResource(
-                if (questionResult == QuestionResult.Success) {
+                if (isCorrectAnswerSelected) {
                     R.string.answer_correct
                 } else {
                     R.string.answer_wrong
