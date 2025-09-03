@@ -2,6 +2,7 @@ package pl.kacperkiedos.kahootapptechchallenge.ui.answer
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -46,7 +47,12 @@ internal fun AnswerItem(
     onAnswerClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Box(modifier = modifier.fillMaxWidth()) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(RoundedCornerShape(4.dp))
+            .clickable(onClick = { onAnswerClick(index) })
+    ) {
         val backgroundColor = when (answerState) {
             AnswerState.QuizOngoing -> backgroundColor
             AnswerState.Correct -> QuestionBackgroundCorrect
@@ -63,7 +69,6 @@ internal fun AnswerItem(
         Card(
             shape = RoundedCornerShape(4.dp),
             colors = CardDefaults.cardColors().copy(containerColor = backgroundColor),
-            onClick = { onAnswerClick(index) },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(bottom = 6.dp)

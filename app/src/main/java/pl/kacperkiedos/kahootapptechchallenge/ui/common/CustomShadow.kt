@@ -12,7 +12,8 @@ import androidx.compose.ui.unit.Dp
 fun CustomShadow(
     color: Color,
     shapeCornerSize: Dp,
-    modifier: Modifier) {
+    modifier: Modifier = Modifier
+) {
     Box(
         modifier = modifier
             .background(
