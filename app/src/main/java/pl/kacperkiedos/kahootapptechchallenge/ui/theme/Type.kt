@@ -1,6 +1,8 @@
 package pl.kacperkiedos.kahootapptechchallenge.ui.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.TextStyle
@@ -30,10 +32,14 @@ val Typography = Typography(
     headlineMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
+        fontSize = 22.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.sp,
-        shadow = Shadow()
+        shadow = Shadow(
+            color = Color.Black.copy(alpha = 0.3f),
+            offset = Offset(0f, 2f),
+            blurRadius = 0f
+        )
     ),
 
     titleLarge = TextStyle(
@@ -58,6 +64,11 @@ val Typography = Typography(
         fontSize = 14.sp,
         lineHeight = 20.sp,
         letterSpacing = 0.sp,
+        shadow = Shadow(
+            color = Color.Black.copy(alpha = 0.35f),
+            offset = Offset(0f, 1f),
+            blurRadius = 0f
+        )
     ),
 
     labelSmall = TextStyle(

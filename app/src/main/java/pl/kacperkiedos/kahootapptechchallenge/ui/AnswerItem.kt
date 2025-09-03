@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -20,7 +22,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.AnswerState
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundCorrect
@@ -70,7 +74,7 @@ internal fun AnswerItem(
                         contentDescription = "",
                         modifier = Modifier
                             .align(Alignment.TopStart)
-                            .padding(start = 8.dp, top = 8.dp)
+                            .padding(start = 6.dp, top = 8.dp)
                             .height(14.dp)
                     )
                 }
@@ -78,8 +82,11 @@ internal fun AnswerItem(
                 Text(
                     text = text,
                     color = Color.White,
+                    textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.labelMedium,
-                    modifier = Modifier.align(Alignment.Center)
+                    modifier = Modifier
+                        .padding(horizontal = 28.dp, vertical = 12.dp)
+                        .align(Alignment.Center)
                 )
             }
         }
