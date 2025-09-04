@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui.answer
+package pl.kacperkiedos.kahootapptechchallenge.ui.quiz.answer
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -24,9 +24,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import pl.kacperkiedos.kahootapptechchallenge.R
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.AnswerState
-import pl.kacperkiedos.kahootapptechchallenge.ui.common.AutoSizeText
-import pl.kacperkiedos.kahootapptechchallenge.ui.common.CustomShadow
-import pl.kacperkiedos.kahootapptechchallenge.ui.common.darken
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common.AutoSizeText
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common.CustomShadow
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common.darken
 import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuestionState
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundCorrect
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongSelected
@@ -135,7 +135,6 @@ internal fun AnswerItem(
                         else Alignment.TopEnd
                     )
                     .offset(
-                        // TODO extract the 6dp value
                         x = if (answerSide == AnswerSide.Left) (-6).dp else 6.dp,
                         y = (-6).dp
                     )

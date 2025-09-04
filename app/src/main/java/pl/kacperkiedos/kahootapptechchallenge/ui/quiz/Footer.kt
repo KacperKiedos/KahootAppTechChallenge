@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui
+package pl.kacperkiedos.kahootapptechchallenge.ui.quiz
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -12,8 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import pl.kacperkiedos.kahootapptechchallenge.R
-import pl.kacperkiedos.kahootapptechchallenge.ui.common.KahootButton
-import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuestionState
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common.KahootButton
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionTimerBackground
 
 @Composable

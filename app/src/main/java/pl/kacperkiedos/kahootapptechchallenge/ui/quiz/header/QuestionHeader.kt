@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui.header
+package pl.kacperkiedos.kahootapptechchallenge.ui.quiz.header
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

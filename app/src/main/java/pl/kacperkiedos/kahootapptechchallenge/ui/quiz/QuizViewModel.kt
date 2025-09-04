@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 internal class QuizViewModel @Inject constructor(
     private val getQuizUseCase: GetQuizUseCase
-) : BaseViewModel<QuizScreenState, QuizScreenEvent>(
+) : BaseViewModel<QuizScreenState, QuizScreenEvent, QuizScreenEffect>(
     initialState = QuizScreenState.Loading
 ) {
     private var quizData: Quiz? = null
@@ -28,7 +28,9 @@ internal class QuizViewModel @Inject constructor(
                 fetchQuizData()
             }
 
-            QuizScreenEvent.NavigateToNextQuestion -> handleNavigationToNextQuestion()
+            QuizScreenEvent.NavigateToNextQuestion -> viewModelScope.launch {
+                handleNavigationToNextQuestion()
+            }
 
             QuizScreenEvent.QuestionTimerCompleted -> handleTimerCompleted()
 
@@ -78,20 +80,24 @@ internal class QuizViewModel @Inject constructor(
         }
     }
 
-    private fun handleNavigationToNextQuestion() {
+    private suspend fun handleNavigationToNextQuestion() {
         val state = stateFlow.value
         val quiz = quizData ?: return
 
         if (state is QuizScreenState.QuizOngoing) {
-            updateState {
-                val newQuestionIndex = state.currentQuestionNumber + 1
-                val newQuestion = quiz.questions[newQuestionIndex - 1]
+            if (state.isLastQuestion()) {
+                pushEffect(QuizScreenEffect.NavigateToQuizResult)
+            } else {
+                updateState {
+                    val newQuestionIndex = state.currentQuestionNumber + 1
+                    val newQuestion = quiz.questions[newQuestionIndex - 1]
 
-                state.copy(
-                    currentQuestionNumber = newQuestionIndex,
-                    question = newQuestion,
-                    questionState = QuestionState.Displaying(timeLimit = newQuestion.time),
-                )
+                    state.copy(
+                        currentQuestionNumber = newQuestionIndex,
+                        question = newQuestion,
+                        questionState = QuestionState.Displaying(timeLimit = newQuestion.time),
+                    )
+                }
             }
         }
     }
@@ -110,8 +116,11 @@ internal class QuizViewModel @Inject constructor(
         }
     }
 
+    private fun QuizScreenState.QuizOngoing.isLastQuestion(): Boolean {
+        return currentQuestionNumber == questionsCount
+    }
+
     companion object {
         private const val QUIZ_ID = "fb4054fc-6a71-463e-88cd-243876715bc1"
-        //private const val QUIZ_ID = "4bc4097d-34a4-4aa5-a4b7-3cf95aa62729"
     }
 }

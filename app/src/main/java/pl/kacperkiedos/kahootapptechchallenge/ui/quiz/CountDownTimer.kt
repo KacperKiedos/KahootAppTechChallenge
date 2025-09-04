@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui
+package pl.kacperkiedos.kahootapptechchallenge.ui.quiz
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.LinearEasing

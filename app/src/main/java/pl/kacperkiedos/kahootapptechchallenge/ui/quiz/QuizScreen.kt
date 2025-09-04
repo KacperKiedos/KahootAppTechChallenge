@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
@@ -19,19 +20,28 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.fromHtml
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import kotlinx.coroutines.flow.Flow
 import pl.kacperkiedos.kahootapptechchallenge.R
-import pl.kacperkiedos.kahootapptechchallenge.ui.Footer
-import pl.kacperkiedos.kahootapptechchallenge.ui.Question
-import pl.kacperkiedos.kahootapptechchallenge.ui.answer.AnswersSection
-import pl.kacperkiedos.kahootapptechchallenge.ui.common.ErrorMessage
-import pl.kacperkiedos.kahootapptechchallenge.ui.header.QuestionHeader
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.answer.AnswersSection
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common.ErrorMessage
+import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.header.QuestionHeader
 
 @Composable
 internal fun QuizScreen(
     state: QuizScreenState,
     onEvent: (QuizScreenEvent) -> Unit,
+    effectFlow: Flow<QuizScreenEffect>,
+    navigateToQuizResult: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    LaunchedEffect(Unit) {
+        effectFlow.collect { effect ->
+            when(effect) {
+                QuizScreenEffect.NavigateToQuizResult -> navigateToQuizResult()
+            }
+        }
+    }
+
     Box(
         modifier = modifier
             .background(Color.LightGray)

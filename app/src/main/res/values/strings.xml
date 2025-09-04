@@ -8,4 +8,6 @@
     <string name="server_error_message">Error message: %s</string>
     <string name="error_retry">Try again</string>
     <string name="timer_completed">Time\'s up!</string>
+    <string name="quiz_completed">Quiz completed!</string>
+    <string name="quiz_try_again">Solve quiz one more time</string>
 </resources>

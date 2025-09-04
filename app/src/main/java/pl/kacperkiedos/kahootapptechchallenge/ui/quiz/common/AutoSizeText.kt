@@ -1,4 +1,4 @@
-package pl.kacperkiedos.kahootapptechchallenge.ui.common
+package pl.kacperkiedos.kahootapptechchallenge.ui.quiz.common
 
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.foundation.text.TextAutoSize

@@ -1,6 +1,7 @@
 package pl.kacperkiedos.kahootapptechchallenge.ui.quiz
 
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.Question
+import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.Effect
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.Event
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.State
 
@@ -25,6 +26,10 @@ internal sealed interface QuizScreenEvent : Event {
     data object RetryDataFetch : QuizScreenEvent
 
     data object QuestionTimerCompleted : QuizScreenEvent
+}
+
+internal sealed interface QuizScreenEffect: Effect {
+    data object NavigateToQuizResult: QuizScreenEffect
 }
 
 sealed interface QuestionState {

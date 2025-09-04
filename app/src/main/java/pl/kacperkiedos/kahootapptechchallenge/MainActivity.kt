@@ -4,22 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizScreen
-import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizViewModel
+import pl.kacperkiedos.kahootapptechchallenge.navigation.NavigationGraph
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.KahootAppTechChallengeTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private val viewModel: QuizViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,11 +22,10 @@ class MainActivity : ComponentActivity() {
         setContent {
             KahootAppTechChallengeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val state by viewModel.stateFlow.collectAsStateWithLifecycle()
+                    val navController = rememberNavController()
 
-                    QuizScreen(
-                        state = state,
-                        onEvent = viewModel::onEvent,
+                    NavigationGraph(
+                        navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
