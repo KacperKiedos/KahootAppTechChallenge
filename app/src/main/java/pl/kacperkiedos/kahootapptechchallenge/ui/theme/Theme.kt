@@ -19,7 +19,7 @@ fun KahootAppTechChallengeTheme(
 ) {
     MaterialTheme(
         colorScheme = LightColorScheme,
-        typography = Typography,
+        typography = KahootAppTechChallengeTypography,
         content = content
     )
 }

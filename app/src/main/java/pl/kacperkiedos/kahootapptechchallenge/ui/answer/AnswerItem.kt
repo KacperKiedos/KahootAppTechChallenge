@@ -70,7 +70,7 @@ internal fun AnswerItem(
             modifier = Modifier
                 .clip(RoundedCornerShape(4.dp))
                 .clickable(
-                    enabled = questionState == QuestionState.Displaying,
+                    enabled = questionState is QuestionState.Displaying,
                     onClick = { onAnswerClick(index) }
                 )
         ) {

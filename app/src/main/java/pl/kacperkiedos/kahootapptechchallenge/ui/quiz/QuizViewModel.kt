@@ -39,13 +39,14 @@ internal class QuizViewModel @Inject constructor(
     private suspend fun fetchQuizData() {
         try {
             val quizData: Quiz = getQuizUseCase(QUIZ_ID)
+            val question = quizData.questions[0]
 
             updateState {
                 QuizScreenState.QuizOngoing(
                     currentQuestionNumber = 1,
                     questionsCount = quizData.questions.size,
-                    question = quizData.questions[0],
-                    questionState = QuestionState.Displaying
+                    question = question,
+                    questionState = QuestionState.Displaying(question.time)
                 )
             }
 
@@ -86,11 +87,12 @@ internal class QuizViewModel @Inject constructor(
         if (state is QuizScreenState.QuizOngoing) {
             updateState {
                 val newQuestionIndex = state.currentQuestionNumber + 1
+                val newQuestion = quizState.quizData.questions[newQuestionIndex - 1]
 
                 state.copy(
                     currentQuestionNumber = newQuestionIndex,
-                    question = quizState.quizData.questions[newQuestionIndex - 1],
-                    questionState = QuestionState.Displaying,
+                    question = newQuestion,
+                    questionState = QuestionState.Displaying(timeLimit = newQuestion.time),
                 )
             }
         }

@@ -28,7 +28,7 @@ private val Montserrat = FontFamily(
     ),
 )
 
-val Typography = Typography(
+val KahootAppTechChallengeTypography = Typography(
     headlineMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,

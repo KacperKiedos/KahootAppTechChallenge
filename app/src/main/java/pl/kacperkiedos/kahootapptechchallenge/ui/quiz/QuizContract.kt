@@ -26,7 +26,9 @@ internal sealed interface QuizScreenEvent : Event {
 }
 
 sealed class QuestionState {
-    data object Displaying : QuestionState()
+    data class Displaying(
+        val timeLimit: Int
+    ) : QuestionState()
 
     data class Answered(
         val selectedAnswerIndex: Int,
