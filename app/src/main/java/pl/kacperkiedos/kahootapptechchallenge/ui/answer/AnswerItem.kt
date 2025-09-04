@@ -49,11 +49,17 @@ internal fun AnswerItem(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxWidth()) {
-        val answerState = when {
-            questionState is QuestionState.Answered -> when {
+        val answerState = when (questionState) {
+            is QuestionState.Answered -> when {
                 questionState.correctAnswerIndex == index -> AnswerState.Correct
                 questionState.isAnswerCorrect.not() && questionState.selectedAnswerIndex == index -> AnswerState.IncorrectSelected
                 else -> AnswerState.IncorrectUnselected
+            }
+
+            is QuestionState.TimerCompleted -> if (questionState.correctAnswerIndex == index) {
+                AnswerState.Correct
+            } else {
+                AnswerState.IncorrectUnselected
             }
 
             else -> AnswerState.QuizOngoing

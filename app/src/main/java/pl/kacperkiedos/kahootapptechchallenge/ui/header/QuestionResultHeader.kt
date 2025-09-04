@@ -18,6 +18,7 @@ import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundWrongSe
 @Composable
 internal fun QuestionResultHeader(
     isCorrectAnswerSelected: Boolean,
+    headerText: String,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -30,13 +31,7 @@ internal fun QuestionResultHeader(
         )
     ) {
         Text(
-            text = stringResource(
-                if (isCorrectAnswerSelected) {
-                    R.string.answer_correct
-                } else {
-                    R.string.answer_wrong
-                }
-            ),
+            text = headerText,
             style = MaterialTheme.typography.headlineMedium,
             color = Color.White,
             modifier = Modifier.align(Alignment.Center)

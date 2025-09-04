@@ -129,7 +129,7 @@ internal fun QuizOngoingScreen(
         Footer(
             questionState = quizScreenStateData.questionState,
             onTimerComplete = {
-                onEvent(QuizScreenEvent.NavigateToNextQuestion)
+                onEvent(QuizScreenEvent.QuestionTimerCompleted)
             },
             onNextQuestionButtonClick = {
                 onEvent(QuizScreenEvent.NavigateToNextQuestion)

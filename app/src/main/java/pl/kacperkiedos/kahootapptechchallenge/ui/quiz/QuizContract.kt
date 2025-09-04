@@ -14,7 +14,7 @@ internal sealed class QuizScreenState : State {
         val questionsCount: Int,
         val question: Question,
         val questionState: QuestionState
-    ): QuizScreenState()
+    ) : QuizScreenState()
 }
 
 internal sealed interface QuizScreenEvent : Event {
@@ -22,17 +22,19 @@ internal sealed interface QuizScreenEvent : Event {
 
     data object NavigateToNextQuestion : QuizScreenEvent
 
-    data object RetryDataFetch: QuizScreenEvent
+    data object RetryDataFetch : QuizScreenEvent
+
+    data object QuestionTimerCompleted : QuizScreenEvent
 }
 
-sealed class QuestionState {
-    data class Displaying(
-        val timeLimit: Int
-    ) : QuestionState()
+sealed interface QuestionState {
+    data class Displaying(val timeLimit: Int) : QuestionState
+
+    data class TimerCompleted(val correctAnswerIndex: Int) : QuestionState
 
     data class Answered(
         val selectedAnswerIndex: Int,
         val correctAnswerIndex: Int,
         val isAnswerCorrect: Boolean
-    ) : QuestionState()
+    ) : QuestionState
 }

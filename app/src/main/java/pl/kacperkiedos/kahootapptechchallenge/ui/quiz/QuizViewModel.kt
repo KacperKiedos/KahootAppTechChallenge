@@ -14,7 +14,7 @@ internal class QuizViewModel @Inject constructor(
 ) : BaseViewModel<QuizScreenState, QuizScreenEvent>(
     initialState = QuizScreenState.Loading
 ) {
-    private var quizState: QuizState? = null
+    private var quizData: Quiz? = null
 
     init {
         viewModelScope.launch {
@@ -30,6 +30,8 @@ internal class QuizViewModel @Inject constructor(
 
             QuizScreenEvent.NavigateToNextQuestion -> handleNavigationToNextQuestion()
 
+            QuizScreenEvent.QuestionTimerCompleted -> handleTimerCompleted()
+
             is QuizScreenEvent.ChooseQuestion -> {
                 handleAnswerChoose(event.selectedAnswerIndex)
             }
@@ -38,23 +40,19 @@ internal class QuizViewModel @Inject constructor(
 
     private suspend fun fetchQuizData() {
         try {
-            val quizData: Quiz = getQuizUseCase(QUIZ_ID)
-            val question = quizData.questions[0]
+            val quizDataResult: Quiz = getQuizUseCase(QUIZ_ID)
+            quizData = quizDataResult
+
+            val question = quizDataResult.questions[0]
 
             updateState {
                 QuizScreenState.QuizOngoing(
                     currentQuestionNumber = 1,
-                    questionsCount = quizData.questions.size,
+                    questionsCount = quizDataResult.questions.size,
                     question = question,
                     questionState = QuestionState.Displaying(question.time)
                 )
             }
-
-            quizState = QuizState(
-                currentQuestionIndex = 0,
-                quizData = quizData
-            )
-
         } catch (exception: Exception) {
             updateState {
                 QuizScreenState.Error(exception.message.toString())
@@ -82,12 +80,12 @@ internal class QuizViewModel @Inject constructor(
 
     private fun handleNavigationToNextQuestion() {
         val state = stateFlow.value
-        val quizState = quizState ?: return
+        val quiz = quizData ?: return
 
         if (state is QuizScreenState.QuizOngoing) {
             updateState {
                 val newQuestionIndex = state.currentQuestionNumber + 1
-                val newQuestion = quizState.quizData.questions[newQuestionIndex - 1]
+                val newQuestion = quiz.questions[newQuestionIndex - 1]
 
                 state.copy(
                     currentQuestionNumber = newQuestionIndex,
@@ -98,13 +96,22 @@ internal class QuizViewModel @Inject constructor(
         }
     }
 
+    private fun handleTimerCompleted() {
+        val state = stateFlow.value
+
+        if (state is QuizScreenState.QuizOngoing) {
+            val correctAnswerIndex = state.question.choices.indexOfFirst { it.correct }
+
+            updateState {
+                state.copy(
+                    questionState = QuestionState.TimerCompleted(correctAnswerIndex)
+                )
+            }
+        }
+    }
+
     companion object {
         private const val QUIZ_ID = "fb4054fc-6a71-463e-88cd-243876715bc1"
         //private const val QUIZ_ID = "4bc4097d-34a4-4aa5-a4b7-3cf95aa62729"
     }
 }
-
-private data class QuizState(
-    val currentQuestionIndex: Int,
-    val quizData: Quiz
-)

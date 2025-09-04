@@ -7,4 +7,5 @@
     <string name="server_error_title">An error has occurred</string>
     <string name="server_error_message">Error message: %s</string>
     <string name="error_retry">Try again</string>
+    <string name="timer_completed">Time\'s up!</string>
 </resources>
