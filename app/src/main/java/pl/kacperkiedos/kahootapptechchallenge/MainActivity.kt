@@ -12,11 +12,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
-import pl.kacperkiedos.kahootapptechchallenge.domain.repository.QuizRepository
 import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizScreen
 import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuizViewModel
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.KahootAppTechChallengeTheme
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

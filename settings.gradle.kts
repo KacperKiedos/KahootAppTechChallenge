@@ -21,3 +21,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "KahootAppTechChallenge"
 include(":app")
+include(":domain")
+include(":data")

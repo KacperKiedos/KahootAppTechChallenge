@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import pl.kacperkiedos.kahootapptechchallenge.BuildConfig
+import pl.kacperkiedos.kahootapptechchallenge.data.BuildConfig
 import pl.kacperkiedos.kahootapptechchallenge.data.remote.QuizService
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
