@@ -76,4 +76,5 @@ dependencies {
     implementation(libs.coil.networking)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.kotlinx.immutable.collections)
 }

@@ -2,15 +2,16 @@ package pl.kacperkiedos.kahootapptechchallenge.ui.quiz.answer
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import pl.kacperkiedos.kahootapptechchallenge.domain.model.Choice
+import kotlinx.collections.immutable.ImmutableList
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.QuestionType
+import pl.kacperkiedos.kahootapptechchallenge.ui.model.ChoiceUI
 import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuestionState
 
 @Composable
 internal fun AnswersSection(
     questionType: QuestionType,
     questionState: QuestionState,
-    choices: List<Choice>,
+    choices: ImmutableList<ChoiceUI>,
     onAnswerClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {

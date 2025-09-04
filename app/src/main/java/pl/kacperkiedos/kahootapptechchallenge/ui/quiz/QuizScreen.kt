@@ -36,7 +36,7 @@ internal fun QuizScreen(
 ) {
     LaunchedEffect(Unit) {
         effectFlow.collect { effect ->
-            when(effect) {
+            when (effect) {
                 QuizScreenEffect.NavigateToQuizResult -> navigateToQuizResult()
             }
         }

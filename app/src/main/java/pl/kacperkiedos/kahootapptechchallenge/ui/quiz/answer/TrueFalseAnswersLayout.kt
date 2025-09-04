@@ -9,8 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import kotlinx.collections.immutable.ImmutableList
 import pl.kacperkiedos.kahootapptechchallenge.R
-import pl.kacperkiedos.kahootapptechchallenge.domain.model.Choice
+import pl.kacperkiedos.kahootapptechchallenge.ui.model.ChoiceUI
 import pl.kacperkiedos.kahootapptechchallenge.ui.quiz.QuestionState
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundBlue
 import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundRed
@@ -18,7 +19,7 @@ import pl.kacperkiedos.kahootapptechchallenge.ui.theme.QuestionBackgroundRed
 @Composable
 internal fun TrueFalseAnswersLayout(
     questionState: QuestionState,
-    choices: List<Choice>,
+    choices: ImmutableList<ChoiceUI>,
     onAnswerClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {

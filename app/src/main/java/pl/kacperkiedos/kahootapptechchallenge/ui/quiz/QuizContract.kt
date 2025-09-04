@@ -1,6 +1,6 @@
 package pl.kacperkiedos.kahootapptechchallenge.ui.quiz
 
-import pl.kacperkiedos.kahootapptechchallenge.domain.model.Question
+import pl.kacperkiedos.kahootapptechchallenge.ui.model.QuestionUI
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.Effect
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.Event
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.State
@@ -13,7 +13,7 @@ internal sealed class QuizScreenState : State {
     data class QuizOngoing(
         val currentQuestionNumber: Int,
         val questionsCount: Int,
-        val question: Question,
+        val question: QuestionUI,
         val questionState: QuestionState
     ) : QuizScreenState()
 }

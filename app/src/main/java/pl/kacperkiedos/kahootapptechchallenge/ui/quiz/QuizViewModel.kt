@@ -5,6 +5,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import pl.kacperkiedos.kahootapptechchallenge.domain.model.Quiz
 import pl.kacperkiedos.kahootapptechchallenge.domain.usecase.GetQuizUseCase
+import pl.kacperkiedos.kahootapptechchallenge.ui.model.toUI
 import pl.kacperkiedos.kahootapptechchallenge.ui.viewmodel.BaseViewModel
 import javax.inject.Inject
 
@@ -51,7 +52,7 @@ internal class QuizViewModel @Inject constructor(
                 QuizScreenState.QuizOngoing(
                     currentQuestionNumber = 1,
                     questionsCount = quizDataResult.questions.size,
-                    question = question,
+                    question = question.toUI(),
                     questionState = QuestionState.Displaying(question.time)
                 )
             }
@@ -94,7 +95,7 @@ internal class QuizViewModel @Inject constructor(
 
                     state.copy(
                         currentQuestionNumber = newQuestionIndex,
-                        question = newQuestion,
+                        question = newQuestion.toUI(),
                         questionState = QuestionState.Displaying(timeLimit = newQuestion.time),
                     )
                 }
