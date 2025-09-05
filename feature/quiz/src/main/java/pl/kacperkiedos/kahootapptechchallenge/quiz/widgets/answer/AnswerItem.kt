@@ -49,28 +49,8 @@ internal fun AnswerItem(
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier.fillMaxWidth()) {
-        val answerState = when (questionState) {
-            is QuestionState.Answered -> when {
-                questionState.correctAnswerIndex == index -> AnswerState.Correct
-                questionState.isAnswerCorrect.not() && questionState.selectedAnswerIndex == index -> AnswerState.IncorrectSelected
-                else -> AnswerState.IncorrectUnselected
-            }
-
-            is QuestionState.TimerCompleted -> if (questionState.correctAnswerIndex == index) {
-                AnswerState.Correct
-            } else {
-                AnswerState.IncorrectUnselected
-            }
-
-            else -> AnswerState.QuizOngoing
-        }
-
-        val backgroundColor = when (answerState) {
-            AnswerState.QuizOngoing -> backgroundColor
-            AnswerState.Correct -> QuestionBackgroundCorrect
-            AnswerState.IncorrectSelected -> QuestionBackgroundWrongSelected
-            AnswerState.IncorrectUnselected -> QuestionBackgroundWrongUnselected
-        }
+        val answerState = questionState.getAnswerState(index)
+        val backgroundColor = answerState.getBackgroundColor(backgroundColor)
 
         Box(
             modifier = Modifier
@@ -142,4 +122,27 @@ internal fun AnswerItem(
             )
         }
     }
+}
+
+private fun QuestionState.getAnswerState(currentIndex: Int) = when (this) {
+    is QuestionState.Answered -> when {
+        correctAnswerIndex == currentIndex -> AnswerState.Correct
+        isAnswerCorrect.not() && selectedAnswerIndex == currentIndex -> AnswerState.IncorrectSelected
+        else -> AnswerState.IncorrectUnselected
+    }
+
+    is QuestionState.TimerCompleted -> if (correctAnswerIndex == currentIndex) {
+        AnswerState.Correct
+    } else {
+        AnswerState.IncorrectUnselected
+    }
+
+    else -> AnswerState.QuizOngoing
+}
+
+private fun AnswerState.getBackgroundColor(defaultColor: Color) = when (this) {
+    AnswerState.QuizOngoing -> defaultColor
+    AnswerState.Correct -> QuestionBackgroundCorrect
+    AnswerState.IncorrectSelected -> QuestionBackgroundWrongSelected
+    AnswerState.IncorrectUnselected -> QuestionBackgroundWrongUnselected
 }
