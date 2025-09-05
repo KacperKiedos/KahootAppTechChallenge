@@ -23,3 +23,6 @@ rootProject.name = "KahootAppTechChallenge"
 include(":app")
 include(":domain")
 include(":data")
+include(":core:ui")
+include(":feature:quiz")
+include(":feature:quizresult")

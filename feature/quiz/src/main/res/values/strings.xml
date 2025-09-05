@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quiz">Quiz</string>
+    <string name="answer_correct">Correct</string>
+    <string name="answer_wrong">Wrong</string>
+    <string name="next_question_button_title">Continue</string>
+    <string name="timer_completed">Time\'s up!</string>
+</resources>

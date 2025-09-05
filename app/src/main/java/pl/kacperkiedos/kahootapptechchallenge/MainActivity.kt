@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import pl.kacperkiedos.kahootapptechchallenge.navigation.NavigationGraph
-import pl.kacperkiedos.kahootapptechchallenge.ui.theme.KahootAppTechChallengeTheme
+import pl.kacperkiedos.kahootapptechchallenge.theme.KahootAppTechChallengeTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
