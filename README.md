@@ -18,6 +18,8 @@ Application's .apk file has been uploaded to the repository. You can find it [he
 
 3. In the given API URL 7th items has two correct answers. In the project I have assumed that there are only questions with only one correct answer and so that in case of this question application will show that only the first question is correct. In order to support many correct answers I would need to make changes in the `QuestionState.Answered` and `QuestionState.TimerCompleted` classes. Instead of passing single `correctAnswerIndex` the indexes list should be passed.
 
+4. The answers layouts has one minor bug - close to the task submission I have found that right side answers items has different width than the left side answers. The difference is the padding value. The fix is to use Spacer component to create space between items instead of setting the padding modifier.
+
 ### Application appearance
 <div style="text-align: center;">  <div>
     <img src="/screenshots/1.jpg" width="200" />
