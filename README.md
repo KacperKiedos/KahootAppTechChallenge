@@ -10,7 +10,7 @@ In case of any questions don't hesitate to contact me!
 
 Application's .apk file has been uploaded to the repository. You can find it [here](https://github.com/KacperKiedos/KahootAppTechChallenge/blob/main/artifacts/kacper-kiedos-kahoot-app-tech-challenge.apk). The application can be installed on the device / emulator by using the `adb install <apk_name>` command.
 
-### Remarks
+### Things to improve
 
 1. I have realized too late that "the next question should load after some time" requirement exists and I have decided not to add it. It could be implemented in the [QuizViewModel](https://github.com/KacperKiedos/KahootAppTechChallenge/blob/main/feature/quiz/src/main/java/pl/kacperkiedos/kahootapptechchallenge/quiz/screen/QuizViewModel.kt). After receving the `QuizScreenEvent.ChooseQuestion` or `QuizScreenEvent.QuestionTimerCompleted` events the corotutine with the delay could be started. When the `QuizScreenEvent.NavigateToNextQuestion` event will not be sent till delay time the ViewModel would invoke the `handleNavigationToNextQuestion` method and the question would be changed. Otherwise the timer coroutine's `Job` would be cancelled.
 
